@@ -26,7 +26,7 @@
                     android:layout_weight="1"
                     android:background="@color/space_bg"/>
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-            <com.king.view.flutteringlayout.FlutteringLayout
+            <com.king.easychat.view.FlutteringLayout
                 android:id="@+id/fl"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
