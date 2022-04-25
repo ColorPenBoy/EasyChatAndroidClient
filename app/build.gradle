@@ -96,7 +96,8 @@ android {
 
     def API_RELEASE_HOST = "\"192.168.1.4\""
 //    def API_DEV_HOST = "\"192.168.100.54\""
-    def API_DEV_HOST = "\"192.168.1.4\""
+//    def API_DEV_HOST = "\"192.168.1.4\""
+    def API_DEV_HOST = "\"172.20.10.3\""
 
     flavorDimensions "flavor"
     productFlavors {

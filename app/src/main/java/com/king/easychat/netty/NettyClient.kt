@@ -25,7 +25,7 @@ class NettyClient {
   companion object{
 
     private const val HOST = Constants.HOST
-    private const val PORT = 8000
+    private const val PORT = 10022
 
     val INSTANCE : NettyClient by lazy (mode = LazyThreadSafetyMode.SYNCHRONIZED) { NettyClient() }
 

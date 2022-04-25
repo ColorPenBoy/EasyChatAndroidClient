@@ -12,6 +12,8 @@ import com.king.base.util.StringUtils
 import com.king.easychat.R
 import com.king.easychat.app.Constants
 import com.king.easychat.app.base.BaseActivity
+import com.king.easychat.app.chat.GroupChatActivity
+import com.king.easychat.app.home.HomeActivity
 import com.king.easychat.app.service.HeartBeatService
 import com.king.easychat.databinding.LoginActivityBinding
 import com.king.easychat.netty.packet.resp.LoginResp
@@ -49,7 +51,7 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(), View
         if(StringUtils.isBlank(username)){
             username = Cache.getUsername()
         }
-
+        username = "1000000001"
         etUsername.setText(username)
 
         if(StringUtils.isNotBlank(username)){
@@ -59,8 +61,6 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(), View
         clickRightClear(etUsername)
         clickRightEye(etPassword)
         btnLogin.setOnClickListener(this)
-        tvForgotPwd.setOnClickListener(this)
-        tvRegister.setOnClickListener(this)
 
     }
 
@@ -79,8 +79,11 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(), View
         hideLoading()
         if(resp.success){
             getApp().login(resp)
-            mViewModel.loginReq?.token = resp.token
-            Cache.put(mViewModel.loginReq,resp.token)
+
+            println("login success - $resp")
+
+//            mViewModel.loginReq?.token = resp.token
+//            Cache.put(mViewModel.loginReq,resp.token)
             HeartBeatService.startHeartBeatService(context)
             startHomeActivity()
             finish()
@@ -88,7 +91,6 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(), View
             showToast(resp.reason)
         }
     }
-
 
     fun clickForgotPwd(){
         showTodo()
@@ -106,9 +108,9 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(), View
             return
         }
 
-        val password = etPassword.text.toString()
+        val carVersion = etPassword.text.toString()
 
-        mViewModel.login(username!!,password)
+        mViewModel.login(username!!.toLong(), carVersion)
     }
 
     private fun clickLogo(){
@@ -131,8 +133,6 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginActivityBinding>(), View
             R.id.ivLeft -> onBackPressed()
             R.id.ivLogo -> clickLogo()
             R.id.btnLogin -> clickLogin()
-            R.id.tvForgotPwd -> clickForgotPwd()
-            R.id.tvRegister -> clickRegister()
         }
     }
 

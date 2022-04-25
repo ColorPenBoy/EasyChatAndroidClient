@@ -51,6 +51,8 @@ class GroupViewModel @Inject constructor(application: Application, model: GroupM
             }
         }
 
+
+
     }
 
     fun createGroup(groupName: String){

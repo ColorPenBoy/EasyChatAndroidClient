@@ -50,31 +50,25 @@ class LoginViewModel @Inject constructor(application: Application, model: BaseMo
         super.onDestroy()
     }
 
-    fun login(username: String,password: String){
+    fun login(userId : Long, carVersion : String){
         showLoading()
-        loginReq = LoginReq(null,username,password)
-        if(!NettyClient.INSTANCE.isConnected()){
+        loginReq = LoginReq(userId, carVersion)
+        if (!NettyClient.INSTANCE.isConnected()) {
             NettyClient.INSTANCE.setOnConnectListener(object: Netty.OnConnectListener{
                 override fun onSuccess() {
                     NettyClient.INSTANCE.sendMessage(loginReq!!)
                     hideLoading()
                 }
-
                 override fun onFailed() {
                     hideLoading()
                 }
-
                 override fun onError(e: Exception?) {
                     hideLoading()
                 }
-
             })
             NettyClient.INSTANCE.connect()
-
-        }else{
+        } else {
             NettyClient.INSTANCE.sendMessage(loginReq!!)
         }
-
-
     }
 }

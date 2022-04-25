@@ -21,7 +21,7 @@ object Cache {
 
     fun put(data: LoginReq?,token: String){
         data?.let {
-            MMKV.defaultMMKV().encode(Constants.KEY_USERNAME,it.userName)
+//            MMKV.defaultMMKV().encode(Constants.KEY_USERNAME,it.userName)
         }
         putToken(token)
 
@@ -58,7 +58,7 @@ object Cache {
             var token: String? = decodeString(Constants.KEY_TOKEN)
 
             if(StringUtils.isNotBlank(token)){
-                loginReq = LoginReq(token,username,null)
+//                loginReq = LoginReq(token,username,null)
             }
         }
 

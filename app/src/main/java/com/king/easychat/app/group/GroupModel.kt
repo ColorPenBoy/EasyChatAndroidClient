@@ -26,32 +26,36 @@ class GroupModel @Inject constructor(repository: IDataRepository?): MessageModel
      * 获取群组列表
      */
     fun getGroups(token: String){
-        groupResource.value = Resource.loading()
-        getRetrofitService(ApiService::class.java)
-            .getGroups(token)
-            .enqueue(object : ApiCallback<Result<List<Group>>>(){
-                override fun onResponse(call: Call<Result<List<Group>>>?, result: Result<List<Group>>?) {
-                    result?.let {
-                        if(it.isSuccess()){
-                            groupResource.value = Resource.success(it.data)
-                            saveGroups(it.data)
-                            return
-                        }else{
-                            groupResource.value = Resource.failure(result.desc)
-                        }
-
-                    } ?: run {
-                        groupResource.value = Resource.failure(null)
-                    }
-
-
-                }
-
-                override fun onError(call: Call<Result<List<Group>>>?, t: Throwable?) {
-                    groupResource.value = Resource.error(t)
-                }
-
-            })
+        var group : Group = Group("1", "测试群1", "https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKRBeo0tHdl4hRt6FcK9LVWKsa1ibcYIuO607vMoaNN9tvhRiaIYlQeL0HIibLMMGgaTfY2PHMS6x2Eg/132", "1000000000")
+        var listGroup : List<Group> = listOf(group)
+        groupResource.value = Resource.success(listGroup)
+        saveGroups(listGroup)
+//        groupResource.value = Resource.loading()
+//        getRetrofitService(ApiService::class.java)
+//            .getGroups(token)
+//            .enqueue(object : ApiCallback<Result<List<Group>>>(){
+//                override fun onResponse(call: Call<Result<List<Group>>>?, result: Result<List<Group>>?) {
+//                    result?.let {
+//                        if(it.isSuccess()){
+//                            groupResource.value = Resource.success(it.data)
+//                            saveGroups(it.data)
+//                            return
+//                        }else{
+//                            groupResource.value = Resource.failure(result.desc)
+//                        }
+//
+//                    } ?: run {
+//                        groupResource.value = Resource.failure(null)
+//                    }
+//
+//
+//                }
+//
+//                override fun onError(call: Call<Result<List<Group>>>?, t: Throwable?) {
+//                    groupResource.value = Resource.error(t)
+//                }
+//
+//            })
 
     }
 
